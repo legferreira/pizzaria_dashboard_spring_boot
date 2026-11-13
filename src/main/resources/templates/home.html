@@ -1,0 +1,16 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org" xmlns:sec="http://www.thymeleaf.org/extras/spring-security">
+    <head th:replace="~{fragments/layout :: head('Início')}"></head>
+    <body>
+        <nav th:replace="~{fragments/layout :: navbar}"></nav>
+
+        <main class="container mt-4">
+            <h1>Bem-vindo</h1>
+            <p>Você está autenticado como <strong sec:authentication="name"></strong>.</p>
+
+            <p sec:authorize="hasRole('FUNCIONARIO')">Seu perfil é <strong>Funcionário</strong>. Você tem acesso à página inicial.</p>
+            <p sec:authorize="hasRole('GESTOR')">Seu perfil é <strong>Gestor</strong>. Você tem acesso ao painel de pedidos.</p>
+            <p sec:authorize="hasRole('ADMIN')">Seu perfil é <strong>Administrador</strong>. Você tem acesso a todas as páginas.</p>
+        </main>
+    </body>
+</html>
