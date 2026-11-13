@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+    <head th:replace="~{fragments/layout :: head('Usuários')}"></head>
+    <body>
+        <nav th:replace="~{fragments/layout :: navbar}"></nav>
+
+        <main class="container mt-4">
+            <h1>Usuários</h1>
+            <table class="table table-bordered table-striped mt-3 align-middle">
+                <thead>
+                    <tr>
+                        <th>Nome</th>
+                        <th>E-mail</th>
+                        <th>Perfil</th>
+                        <th>Ações</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr th:each="usuario : ${usuarios}">
+                        <td th:text="${usuario.nome}"></td>
+                        <td th:text="${usuario.email}"></td>
+                        <td>
+                            <span th:if="${usuario.email == #authentication.name}" th:text="${usuario.perfil}"></span>
+                            <form th:unless="${usuario.email == #authentication.name}"
+                                  th:action="@{'/admin/usuarios/' + ${usuario.id} + '/perfil'}" method="post" class="d-flex gap-2">
+                                <select name="perfil" class="form-select form-select-sm">
+                                    <option th:each="perfil : ${perfis}" th:value="${perfil}" th:text="${perfil}"
+                                            th:selected="${perfil == usuario.perfil}"></option>
+                                </select>
+                                <button type="submit" class="btn btn-principal btn-sm">Salvar</button>
+                            </form>
+                        </td>
+                        <td>
+                            <form th:unless="${usuario.email == #authentication.name}"
+                                  th:action="@{'/admin/usuarios/' + ${usuario.id} + '/excluir'}" method="post">
+                                <button type="submit" class="btn btn-danger btn-sm">Excluir</button>
+                            </form>
+                        </td>
+                    </tr>
+                </tbody>
+            </table>
+        </main>
+    </body>
+</html>
