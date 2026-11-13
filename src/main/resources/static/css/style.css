@@ -1,0 +1,71 @@
+body {
+    background-color: var(--cor-fundo);
+    color: var(--cor-texto);
+}
+
+.barra {
+    background-color: var(--cor-barra);
+}
+
+.barra .navbar-brand,
+.barra .nav-link,
+.barra .navbar-text {
+    color: var(--cor-barra-texto);
+}
+
+.barra .nav-link:hover {
+    color: var(--cor-barra-texto);
+    text-decoration: underline;
+}
+
+.btn-sair {
+    color: var(--cor-barra-texto);
+    border: 1px solid var(--cor-barra-texto);
+}
+
+.btn-principal,
+.btn-principal:hover {
+    background-color: var(--cor-principal);
+    color: var(--cor-principal-texto);
+}
+
+.caixa-central {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    min-height: 100vh;
+}
+
+.cartao {
+    max-width: 400px;
+    width: 100%;
+    padding: 2rem;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+    border-radius: 8px;
+    background-color: var(--cor-cartao);
+}
+
+.table {
+    --bs-table-bg: var(--cor-cartao);
+    --bs-table-color: var(--cor-texto);
+    --bs-table-striped-color: var(--cor-texto);
+}
+
+.cartao-painel {
+    padding: 1rem;
+    border-radius: 8px;
+    background-color: var(--cor-cartao);
+    box-shadow: 0 2px 6px rgba(0, 0, 0, 0.12);
+    height: 100%;
+}
+
+.indicador {
+    display: flex;
+    flex-direction: column;
+    text-align: center;
+}
+
+.indicador strong {
+    font-size: 2rem;
+    color: var(--cor-principal);
+}

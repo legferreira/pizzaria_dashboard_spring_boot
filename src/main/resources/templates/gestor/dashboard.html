@@ -1,0 +1,116 @@
+<!DOCTYPE html>
+<html lang="pt-BR" xmlns:th="http://www.thymeleaf.org">
+    <head th:replace="~{fragments/layout :: head('Pedidos')}"></head>
+    <body>
+        <nav th:replace="~{fragments/layout :: navbar}"></nav>
+
+        <main class="container mt-4 mb-5">
+            <div class="d-flex justify-content-between align-items-center">
+                <h1>Dashboard de pedidos</h1>
+                <small>Atualizado às <span id="ultimaAtualizacao">--</span></small>
+            </div>
+
+            <form id="filtros" class="row g-2 mt-2 cartao-painel">
+                <div class="col-md-2">
+                    <label for="inicio" class="form-label">Pedido de</label>
+                    <input type="date" class="form-control" id="inicio" name="inicio">
+                </div>
+                <div class="col-md-2">
+                    <label for="fim" class="form-label">Até</label>
+                    <input type="date" class="form-control" id="fim" name="fim">
+                </div>
+                <div class="col-md-2">
+                    <label for="status" class="form-label">Status</label>
+                    <select class="form-select" id="status" name="status">
+                        <option value="">Todos</option>
+                        <option>Recebido</option>
+                        <option>Em preparo</option>
+                        <option>Entregue</option>
+                        <option>Cancelado</option>
+                    </select>
+                </div>
+                <div class="col-md-2">
+                    <label for="sabor" class="form-label">Sabor</label>
+                    <select class="form-select" id="sabor" name="sabor">
+                        <option value="">Todos</option>
+                        <option>Calabresa</option>
+                        <option>Mussarela</option>
+                        <option>Portuguesa</option>
+                        <option>Frango com catupiry</option>
+                    </select>
+                </div>
+                <div class="col-md-2">
+                    <label for="atendente" class="form-label">Atendente</label>
+                    <input type="text" class="form-control" id="atendente" name="atendente">
+                </div>
+                <div class="col-md-2 d-flex align-items-end gap-2">
+                    <button type="submit" class="btn btn-principal">Filtrar</button>
+                    <button type="button" class="btn btn-outline-secondary" id="limpar">Limpar</button>
+                </div>
+            </form>
+
+            <div id="mensagem" class="alert d-none mt-3"></div>
+
+            <div class="row g-3 mt-1">
+                <div class="col"><div class="cartao-painel indicador"><span>Total</span><strong id="total">0</strong></div></div>
+                <div class="col"><div class="cartao-painel indicador"><span>Em preparo</span><strong id="emPreparo">0</strong></div></div>
+                <div class="col"><div class="cartao-painel indicador"><span>Entregues</span><strong id="entregues">0</strong></div></div>
+                <div class="col"><div class="cartao-painel indicador"><span>Cancelados</span><strong id="cancelados">0</strong></div></div>
+                <div class="col"><div class="cartao-painel indicador"><span>Faturamento</span><strong id="faturamento">0</strong></div></div>
+                <div class="col"><div class="cartao-painel indicador"><span>Ticket médio</span><strong id="ticketMedio">0</strong></div></div>
+            </div>
+
+            <div class="row g-3 mt-1">
+                <div class="col-md-6">
+                    <div class="cartao-painel">
+                        <h5>Faturamento por período</h5>
+                        <canvas id="graficoFaturamento"></canvas>
+                    </div>
+                </div>
+                <div class="col-md-3">
+                    <div class="cartao-painel">
+                        <h5>Situação dos pedidos</h5>
+                        <canvas id="graficoStatus"></canvas>
+                    </div>
+                </div>
+                <div class="col-md-3">
+                    <div class="cartao-painel">
+                        <h5>Sabores mais vendidos</h5>
+                        <table class="table table-sm mb-0">
+                            <thead><tr><th>Sabor</th><th>Pedidos</th></tr></thead>
+                            <tbody id="rankingSabores"></tbody>
+                        </table>
+                    </div>
+                </div>
+            </div>
+
+            <div class="cartao-painel mt-3">
+                <div class="d-flex justify-content-between align-items-center">
+                    <h5>Pedidos</h5>
+                    <button type="button" class="btn btn-sm btn-principal" id="atualizar">Atualizar</button>
+                </div>
+                <div class="table-responsive">
+                    <table class="table table-sm table-striped mb-0">
+                        <thead>
+                            <tr>
+                                <th>Cliente</th>
+                                <th>Descrição</th>
+                                <th>Sabor</th>
+                                <th>Status</th>
+                                <th>Valor</th>
+                                <th>Atendente</th>
+                                <th>Pedido</th>
+                                <th>Entrega</th>
+                                <th>Observação</th>
+                            </tr>
+                        </thead>
+                        <tbody id="tabelaPedidos"></tbody>
+                    </table>
+                </div>
+            </div>
+        </main>
+
+        <script src="https://cdn.jsdelivr.net/npm/chart.js@4.4.1/dist/chart.umd.js"></script>
+        <script th:src="@{/js/dashboard.js}"></script>
+    </body>
+</html>
